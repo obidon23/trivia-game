@@ -9,6 +9,7 @@ var ledZeppelin = [
 		answer3: "John Paul Jones",
 		answer4: "John Bonham",
 		correctAnswer: "John Bonham",
+		factoid: "John Bonham died in 1980 and the remaining members decided to disband rather than replace him."
 	},
 
 	{
@@ -38,7 +39,7 @@ var ledZeppelin = [
 	},
 
 	{
-				question: "In what year did Led Zeppelin's debut album get released?",
+		question: "In what year did Led Zeppelin's debut album get released?",
 		answer1: "1967",
 		answer2: "1968",
 		answer3: "1969",
@@ -46,13 +47,14 @@ var ledZeppelin = [
 		correctAnswer: "1969",
 	},
 ]
-	var currentQuestionPage = ledZeppelin[0];
-	var currentQuestion = 0
-	var currentAnswer1  = ledZeppelin[0].answer1;
-	var currentAnswer2 = ledZeppelin[0].answer2;
-	var currentAnswer3 = ledZeppelin[0].answer3;
-	var currentAnswer4 = ledZeppelin[0].answer4;
-	var currentCorrectAnswer = ledZeppelin[0].correctAnswer;
+	var currentObject = 0;
+	var currentQuestion = ledZeppelin[currentObject].question;
+	var currentAnswer1  = ledZeppelin[currentObject].answer1;
+	var currentAnswer2 = ledZeppelin[currentObject].answer2;
+	var currentAnswer3 = ledZeppelin[currentObject].answer3;
+	var currentAnswer4 = ledZeppelin[currentObject].answer4;
+	var currentCorrectAnswer = ledZeppelin[currentObject].correctAnswer;
+	var currentFactoid = ledZeppelin[currentObject].factoid;
 	var correctAnswers = 0;
 	var incorrectAnswers = 0;
 	var questionCount = 0;
@@ -61,25 +63,11 @@ var ledZeppelin = [
 
 
 //FUNCTIONS====================================
-// function timer() {
-// 	var interval = setInterval(function() {
-//     	counter--;
-//     	// Display 'counter' wherever you want to display it.
-// 	    if (counter === 0) {
-//         // Display a login box
-//     	    $("#countdown").html("<p>Time's Up!</p>")
-//         	clearInterval(interval);
-//     	}
 
-// 	    else {	$("#countdown").html("<p>Seconds Remaining: " + counter + "</p>");
-// 		}
-// 	}, 1000);
-
-// 	nextQuestion();
-// }
 
 function nextQuestion() {
-
+		console.log(currentObject);
+		console.log(currentQuestion);
 	var interval = setInterval(function() {
 			
     	counter--;
@@ -90,7 +78,11 @@ function nextQuestion() {
         	clearInterval(interval);
     		console.log("next question");
     		counter = 5;
-        	// nextQuestion();
+    		currentObject++;
+    		var interval2 = setInterval(function() {
+    			$("#question").html("The answer was " + currentCorrectAnswer).append("<br />" + currentFactoid);
+    		}, 3000);
+        	nextQuestion();
     	}
 
 	    else {	$("#countdown").html("<p>Seconds Remaining: " + counter + "</p>");
@@ -98,22 +90,12 @@ function nextQuestion() {
 	}, 1000);	
 
 	// currentQuestion = key.question;
-	$("#question").html("<label>" + ledZeppelin[currentQuestion]+ "</label>")
+	$("#question").html("<label>" + currentQuestion + "</label>")
 		.append("<br/><input type='radio' name = " +currentQuestion +"  value='" + currentAnswer1 +"'>" + currentAnswer1 + "<checked>")
 		.append("<br/><input type='radio' name = " + currentQuestion + "value='" + currentAnswer2 +"'>" + currentAnswer2 + "</>")
 		.append("<br/><input type='radio' name = " +currentQuestion +"  value='" + currentAnswer3 +"'>" + currentAnswer3 + "<checked>")
 		.append("<br/><input type='radio' name = " + currentQuestion + "value='" + currentAnswer4 +"'>" + currentAnswer4 + "</>");
 }
-
-
-$(function() {
-	$('#submitAnswer').submit(function() {
-		playerGuess = $('input(value)').val();
-		console.log("Player guessed " + playerGuess);
-		return false;
-	})
-});
-
 
 $("#submitAnswer").on("submit", function(e) {
 
@@ -138,5 +120,4 @@ $("#countdown").html("<p>Seconds Remaining: " + counter + " </p>");
 nextQuestion();
 // timer();
 
-console.log(currentQuestionPage);
 console.log(currentCorrectAnswer);
