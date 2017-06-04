@@ -46,7 +46,7 @@ var ledZeppelin = [
 		answer4: "1970",
 		correctAnswer: "1969",
 	},
-]
+];
 	var currentObject = 0;
 	var currentQuestion = ledZeppelin[currentObject].question;
 	var currentAnswer1  = ledZeppelin[currentObject].answer1;
@@ -57,7 +57,7 @@ var ledZeppelin = [
 	var currentFactoid = ledZeppelin[currentObject].factoid;
 	var correctAnswers = 0;
 	var incorrectAnswers = 0;
-	var questionCount = 0;
+	// var questionCount = 0;
 	var counter = 5;
 
 
@@ -66,8 +66,10 @@ var ledZeppelin = [
 
 
 function nextQuestion() {
-		console.log(currentObject);
-		console.log(currentQuestion);
+	if (currentObject > ledZeppelin.length-1) {
+		finalScore();
+	} else {
+	console.log(currentObject);
 	var interval = setInterval(function() {
 			
     	counter--;
@@ -79,9 +81,6 @@ function nextQuestion() {
     		console.log("next question");
     		counter = 5;
     		currentObject++;
-    		var interval2 = setInterval(function() {
-    			$("#question").html("The answer was " + currentCorrectAnswer).append("<br />" + currentFactoid);
-    		}, 3000);
         	nextQuestion();
     	}
 
@@ -95,27 +94,32 @@ function nextQuestion() {
 		.append("<br/><input type='radio' name = " + currentQuestion + "value='" + currentAnswer2 +"'>" + currentAnswer2 + "</>")
 		.append("<br/><input type='radio' name = " +currentQuestion +"  value='" + currentAnswer3 +"'>" + currentAnswer3 + "<checked>")
 		.append("<br/><input type='radio' name = " + currentQuestion + "value='" + currentAnswer4 +"'>" + currentAnswer4 + "</>");
+	}
 }
 
 $("#submitAnswer").on("submit", function(e) {
 
-	if (this.value === correctAnswer) {
-		questionCount++;
+	if (radio.value === correctAnswer) {
+
 		correctAnswers++;
 		
 		$("#question").html("Correct!");
 		nextQuestion();
 	} else {
-		questionCount++;
 		incorrectAnswers++;
 		$("#question").html("Wrong!");
 		nextQuestion();
 	}
 })
 
-
+// function finalScore() {
+// 	$("#question").html.("<h2>Your Results<h2>").append("<p>Correct Answers: " + correctAnswers + "</p>").append("<br /> <p> Wrong Answers: " + incorrectAnswers +"</p>");
+// }
 
 //DOM==========================================
+// var interval2 = setInterval(function() {
+//  	$("#question").html("The answer was " + currentCorrectAnswer).append("<br />" + currentFactoid);
+//     		}, 3000);
 $("#countdown").html("<p>Seconds Remaining: " + counter + " </p>");
 nextQuestion();
 // timer();
