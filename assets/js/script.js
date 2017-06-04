@@ -110,7 +110,7 @@ $("#submitAnswer").on("submit", function(e) {
 		$("#question").html("Wrong!");
 		nextQuestion();
 	}
-})
+});
 
 // function finalScore() {
 // 	$("#question").html.("<h2>Your Results<h2>").append("<p>Correct Answers: " + correctAnswers + "</p>").append("<br /> <p> Wrong Answers: " + incorrectAnswers +"</p>");
