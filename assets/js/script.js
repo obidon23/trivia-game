@@ -13,7 +13,7 @@ var ledZeppelin = [
 	},
 
 	{
-		question: "What is the first song on Led Zeppelin 3?",
+		question: "What is the first song on Led Zeppelin III?",
 		answer1: "Kashmir",
 		answer2: "Immigrant Song",
 		answer3: "Achille's Last Stand",
@@ -30,7 +30,7 @@ var ledZeppelin = [
 	},
 
 	 {
-		question: "Who was the youngest member of Led Zeppelin",
+		question: "Who was the youngest member of Led Zeppelin?",
 		answer1: "Jimmy Page",
 		answer2: "Robert Plant",
 		answer3: "John Paul Jones",
@@ -69,7 +69,14 @@ function nextQuestion() {
 	if (currentObject > ledZeppelin.length-1) {
 		finalScore();
 	} else {
-	console.log(currentObject);
+	currentQuestion = ledZeppelin[currentObject].question;
+	currentAnswer1  = ledZeppelin[currentObject].answer1;
+	currentAnswer2 = ledZeppelin[currentObject].answer2;
+	currentAnswer3 = ledZeppelin[currentObject].answer3;
+	currentAnswer4 = ledZeppelin[currentObject].answer4;
+	currentCorrectAnswer = ledZeppelin[currentObject].correctAnswer;
+	currentFactoid = ledZeppelin[currentObject].factoid;
+
 	var interval = setInterval(function() {
 			
     	counter--;
@@ -81,7 +88,7 @@ function nextQuestion() {
     		console.log("next question");
     		counter = 5;
     		currentObject++;
-        	nextQuestion();
+        	factoid();
     	}
 
 	    else {	$("#countdown").html("<p>Seconds Remaining: " + counter + "</p>");
@@ -91,35 +98,48 @@ function nextQuestion() {
 	// currentQuestion = key.question;
 	$("#question").html("<label>" + currentQuestion + "</label>")
 		.append("<br/><input type='radio' name = " +currentQuestion +"  value='" + currentAnswer1 +"'>" + currentAnswer1 + "<checked>")
-		.append("<br/><input type='radio' name = " + currentQuestion + "value='" + currentAnswer2 +"'>" + currentAnswer2 + "</>")
+		.append("<br/><inqput type='radio' name = " + currentQuestion + "value='" + currentAnswer2 +"'>" + currentAnswer2 + "</>")
 		.append("<br/><input type='radio' name = " +currentQuestion +"  value='" + currentAnswer3 +"'>" + currentAnswer3 + "<checked>")
-		.append("<br/><input type='radio' name = " + currentQuestion + "value='" + currentAnswer4 +"'>" + currentAnswer4 + "</>");
+		.append("<br/><input type='radio' name = " + currentQuestion + "value='" + currentAnswer4 +"'>" + currentAnswer4 + "</>")
+		.append("<br/><input type='submit' value='submit answer' id='return answerCheck()' class='btn btn-success submit' />");
+	
 	}
 }
 
-$("#submitAnswer").on("submit", function(e) {
+function answerChecker() {
+	var radio1 = document.getElementById(currentAnswer1).checked;
+	var radio2 = document.getElementById(currentAnswer2).checked;
+	var radio3 = document.getElementById(currentAnswer3).checked;
+	var radio4 = document.getElementById(currentAnswer4).checked;
 
-	if (radio.value === correctAnswer) {
+	if (radio1 === currentCorrectAnswer||radio2 === currentCorrectAnswer||radio3 === currentCorrectAnswer||radio4 === currentCorrectAnswer) {
 
 		correctAnswers++;
 		
 		$("#question").html("Correct!");
-		nextQuestion();
+		factoid();
 	} else {
 		incorrectAnswers++;
 		$("#question").html("Wrong!");
-		nextQuestion();
+		factoid();
 	}
-});
+}
 
-// function finalScore() {
-// 	$("#question").html.("<h2>Your Results<h2>").append("<p>Correct Answers: " + correctAnswers + "</p>").append("<br /> <p> Wrong Answers: " + incorrectAnswers +"</p>");
-// }
+function factoid() {
+	var interval2 = setInterval(function() {
+ 	$("#question").append("The answer was " + currentCorrectAnswer).append("<br /> <p>" + currentFactoid + ".</p>"
+ 		);
+    		}, 3000);
+	nextQuestion();
+}
+
+function finalScore() {
+	$("#question").html("<h2>Your Results<h2>").append("<p>Correct Answers: " + correctAnswers + "</p>").append("<br /> <p> Wrong Answers: " + incorrectAnswers +"</p>");
+}
+
+
 
 //DOM==========================================
-// var interval2 = setInterval(function() {
-//  	$("#question").html("The answer was " + currentCorrectAnswer).append("<br />" + currentFactoid);
-//     		}, 3000);
 $("#countdown").html("<p>Seconds Remaining: " + counter + " </p>");
 nextQuestion();
 // timer();
