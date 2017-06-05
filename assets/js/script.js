@@ -59,7 +59,7 @@ var ledZeppelin = [
 	var incorrectAnswers = 0;
 	// var questionCount = 0;
 	var counter = 5;
-
+	var gameRunning = true;
 
 
 //FUNCTIONS====================================
@@ -98,11 +98,10 @@ function nextQuestion() {
 	// currentQuestion = key.question;
 	$("#question").html("<label>" + currentQuestion + "</label>")
 		.append("<br/><input type='radio' name = " +currentQuestion +"  value='" + currentAnswer1 +"'>" + currentAnswer1 + "<checked>")
-		.append("<br/><inqput type='radio' name = " + currentQuestion + "value='" + currentAnswer2 +"'>" + currentAnswer2 + "</>")
+		.append("<br/><input type='radio' name = " + currentQuestion + "value='" + currentAnswer2 +"'>" + currentAnswer2 + "</>")
 		.append("<br/><input type='radio' name = " +currentQuestion +"  value='" + currentAnswer3 +"'>" + currentAnswer3 + "<checked>")
 		.append("<br/><input type='radio' name = " + currentQuestion + "value='" + currentAnswer4 +"'>" + currentAnswer4 + "</>")
-		.append("<br/><input type='submit' value='submit answer' id='return answerCheck()' class='btn btn-success submit' />");
-	
+		.append("<br/><input type='submit' value='submit' id='return answerCheck()' class='btn btn-success submit'>SUBMIT</input>");
 	}
 }
 
@@ -134,8 +133,12 @@ function factoid() {
 }
 
 function finalScore() {
+	gameRunning === false;
+
+	if (gameRunning = false) {
 	$("#question").html("<h2>Your Results<h2>").append("<p>Correct Answers: " + correctAnswers + "</p>").append("<br /> <p> Wrong Answers: " + incorrectAnswers +"</p>");
-}
+	}
+}	
 
 
 
@@ -144,4 +147,3 @@ $("#countdown").html("<p>Seconds Remaining: " + counter + " </p>");
 nextQuestion();
 // timer();
 
-console.log(currentCorrectAnswer);
