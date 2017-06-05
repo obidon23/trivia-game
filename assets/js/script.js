@@ -60,12 +60,13 @@ var ledZeppelin = [
 	// var questionCount = 0;
 	var counter = 5;
 	var gameRunning = true;
-
+	var answerGuessed;
 
 //FUNCTIONS====================================
 
 
 function nextQuestion() {
+	console.log(currentObject);
 	if (currentObject > ledZeppelin.length-1) {
 		finalScore();
 	} else {
@@ -86,9 +87,8 @@ function nextQuestion() {
     	    $("#countdown").html("<p>Time's Up!</p>");
         	clearInterval(interval);
     		console.log("next question");
-    		counter = 5;
-    		currentObject++;
-        	factoid();
+    		
+        	checkAnswer();
     	}
 
 	    else {	$("#countdown").html("<p>Seconds Remaining: " + counter + "</p>");
@@ -97,47 +97,67 @@ function nextQuestion() {
 
 	// currentQuestion = key.question;
 	$("#question").html("<label>" + currentQuestion + "</label>")
-		.append("<br/><input type='radio' name = " +currentQuestion +"  value='" + currentAnswer1 +"'>" + currentAnswer1 + "<checked>")
-		.append("<br/><input type='radio' name = " + currentQuestion + "value='" + currentAnswer2 +"'>" + currentAnswer2 + "</>")
-		.append("<br/><input type='radio' name = " +currentQuestion +"  value='" + currentAnswer3 +"'>" + currentAnswer3 + "<checked>")
-		.append("<br/><input type='radio' name = " + currentQuestion + "value='" + currentAnswer4 +"'>" + currentAnswer4 + "</>")
-		.append("<br/><input type='submit' value='submit' id='return answerCheck()' class='btn btn-success submit'/>");
+		.append("<br/><input type='radio' name = '" + currentQuestion + "' value='" + currentAnswer1 + "'>" + currentAnswer1 + "</>")
+		.append("<br/><input type='radio' name = '" + currentQuestion + "' value='" + currentAnswer2 + "'>" + currentAnswer2 + "</>")
+		.append("<br/><input type='radio' name = '" + currentQuestion + "' value='" + currentAnswer3 + "'>" + currentAnswer3 + "</>")
+		.append("<br/><input type='radio' name = '" + currentQuestion + "' value='" + currentAnswer4 + "'>" + currentAnswer4 + "</>")
+		.append("<br/><input type='submit' value='submit' id='return answerCheck()' class='btn'/>");
+	}
+}
+function get() {
+	answerGuessed;
+	if (document.f.status[0].checked){
+		document.f.status[0].value;
+		console.log(answerGuessed);
+	} 
+	else if (document.f.status[1].checked){
+		document.f.status[1].value;
+		console.log(answerGuessed);
+	}
+	else if (document.f.status[2].checked){
+		document.f.status[2].value;
+		console.log(answerGuessed);
+	}
+	else if (document.f.status[3].checked){
+		document.f.status[3].value;
+		console.log(answerGuessed);
+	}
+	else {
+		incorrectAnswers++;
+		nextQuestion();
 	}
 }
 
-function answerChecker() {
-	var radio1 = document.getElementById(currentAnswer1).checked;
-	var radio2 = document.getElementById(currentAnswer2).checked;
-	var radio3 = document.getElementById(currentAnswer3).checked;
-	var radio4 = document.getElementById(currentAnswer4).checked;
+function checkAnswer() {
 
-	if (radio1 === currentCorrectAnswer||radio2 === currentCorrectAnswer||radio3 === currentCorrectAnswer||radio4 === currentCorrectAnswer) {
+	if (answerGuessed === currentCorrectAnswer||answerGuessed === currentCorrectAnswer||answerGuessed === currentCorrectAnswer||answerGuessed === currentCorrectAnswer) {
 
 		correctAnswers++;
 		
 		$("#question").html("Correct!");
-		factoid();
+		counter = 60;
+    	currentObject++;
+		nextQuestion();
 	} else {
 		incorrectAnswers++;
 		$("#question").html("Wrong!");
-		factoid();
+		counter = 60;
+    	currentObject++;
+    	nextQuestion();
 	}
 }
 
-function factoid() {
-	var interval2 = setInterval(function() {
- 	$("#question").append("The answer was " + currentCorrectAnswer).append("<br /> <p>" + currentFactoid + ".</p>"
- 		);
-    		}, 3000);
-	nextQuestion();
-}
+// function factoid() {
+// 	var interval2 = setInterval(function() {
+//  	$("#question").append("The answer was " + currentCorrectAnswer).append("<br /> <p>" + currentFactoid + ".</p>"
+//  		);
+//     		}, 3000);
+// 	nextQuestion();
+// }
 
 function finalScore() {
-	gameRunning === false;
-
-	if (gameRunning = false) {
 	$("#question").html("<h2>Your Results<h2>").append("<p>Correct Answers: " + correctAnswers + "</p>").append("<br /> <p> Wrong Answers: " + incorrectAnswers +"</p>");
-	}
+
 }	
 
 
