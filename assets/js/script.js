@@ -101,7 +101,7 @@ function nextQuestion() {
 		.append("<br/><input type='radio' name = " + currentQuestion + "value='" + currentAnswer2 +"'>" + currentAnswer2 + "</>")
 		.append("<br/><input type='radio' name = " +currentQuestion +"  value='" + currentAnswer3 +"'>" + currentAnswer3 + "<checked>")
 		.append("<br/><input type='radio' name = " + currentQuestion + "value='" + currentAnswer4 +"'>" + currentAnswer4 + "</>")
-		.append("<br/><input type='submit' value='submit' id='return answerCheck()' class='btn btn-success submit'>SUBMIT</input>");
+		.append("<br/><input type='submit' value='submit' id='return answerCheck()' class='btn btn-success submit'/>");
 	}
 }
 
