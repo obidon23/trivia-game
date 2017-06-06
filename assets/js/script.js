@@ -62,13 +62,13 @@ var ledZeppelin = [
 	var correctAnswers = 0;
 	var incorrectAnswers = 0;
 	// var questionCount = 0;
-	var counter = 5;
-	var gameRunning = true;
+	var counter = 20
 	var answerGuessed;
 
 //FUNCTIONS====================================
 function startGame() {
 	currentObject = 0
+	$("#countdown").html("<p>Seconds Remaining: " + counter + " </p>");
 	nextQuestion();
 }
 
@@ -76,7 +76,8 @@ function nextQuestion() {
 	console.log(currentObject);
 	if (currentObject > ledZeppelin.length-1) {
 		finalScore();
-	} else {
+	} 
+	else {
 	currentQuestion = ledZeppelin[currentObject].question;
 	currentAnswer1  = ledZeppelin[currentObject].answer1;
 	currentAnswer2 = ledZeppelin[currentObject].answer2;
@@ -126,13 +127,20 @@ function checkAnswer() {
 		correctAnswers++;
 		
 		$("#question").html("Correct!");
-		factoid();
+		if (currentObject = ledZeppelin-1) {
+			finalFactoid();
+		}
+		else {
+			factoid();
+		}
 	} else {
 		incorrectAnswers++;
 		$("#question").html("Wrong!");
-		factoid();
-	}
-
+		if (currentObject-ledZeppelin-1) {
+			finalFactoid();
+		}
+		else {	factoid();
+		}
     	
 }
 
@@ -141,6 +149,13 @@ function factoid() {
 		currentObject++;
 		var continueButton = $("#continue");
 		continueButton.on("click",  nextQuestion);
+		}
+
+function finalFactoid() {
+	$("#question").append("<p>The correct answer was " + currentCorrectAnswer +".").append("<br /> <p>" + currentFactoid + "</p>").append('<br /> <button type="submit" id="continue">See Scores</button>');
+		currentObject++;
+		var continueButton = $("#continue");
+		continueButton.on("click", finalScore);
 		}
 
 
@@ -158,8 +173,8 @@ function finalScore() {
 
 
 //DOM==========================================
-$("#countdown").html("<p>Seconds Remaining: " + counter + " </p>");
-nextQuestion();
+// $("#countdown").html("<p>Seconds Remaining: " + counter + " </p>");
+// nextQuestion();
 $("#start").on("click", startGame());
 $("#submit").on("click", checkAnswer());
 
