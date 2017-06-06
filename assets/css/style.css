@@ -43,3 +43,8 @@ input.radio {
 	color: white;
 	background-color: lightgrey;
 }	
+
+h2 {
+	color: red;
+	font-size: 36px;
+}

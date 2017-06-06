@@ -13,12 +13,13 @@ var ledZeppelin = [
 	},
 
 	{
-		question: "What is the first song on Led Zeppelin 3?",
+		question: "What is the first song on Led Zeppelin III?",
 		answer1: "Kashmir",
 		answer2: "Immigrant Song",
 		answer3: "Achille's Last Stand",
 		answer4: "Thank You",
 		correctAnswer: "Immigrant Song",
+		factoid: "Bron-Yr-Aur Stomp references the remote Welsh cottage where most of the tracks were written"
 	},
 	 {
 		question: "What song charted highest for Led Zeppelin?",
@@ -27,15 +28,17 @@ var ledZeppelin = [
 		answer3: "Misty Mountain Hop",
 		answer4: "Rock and Roll",
 		correctAnswer: "Whole Lotta Love",
+		factoid: "Whole Lotta Love, one of the few songs released as singles,  peaked at #2 on the Billboard Hot 100."
 	},
 
 	 {
-		question: "Who was the youngest member of Led Zeppelin",
+		question: "Who was the youngest member of Led Zeppelin?",
 		answer1: "Jimmy Page",
 		answer2: "Robert Plant",
 		answer3: "John Paul Jones",
 		answer4: "John Bonham",
 		correctAnswer: "Robert Plant",
+		factoid: "Robert was just 19 when the band formed. Plant also suggested using John Bonham as drummer."
 	},
 
 	{
@@ -45,6 +48,7 @@ var ledZeppelin = [
 		answer3: "1969",
 		answer4: "1970",
 		correctAnswer: "1969",
+		factoid: "Led Zeppelin was released in January in the USA, while Led Zepelin II came out later that year in October."
 	},
 ];
 	var currentObject = 0;
@@ -59,69 +63,105 @@ var ledZeppelin = [
 	var incorrectAnswers = 0;
 	// var questionCount = 0;
 	var counter = 5;
-
-
+	var gameRunning = true;
+	var answerGuessed;
 
 //FUNCTIONS====================================
-
+function startGame() {
+	currentObject = 0
+	nextQuestion();
+}
 
 function nextQuestion() {
+	console.log(currentObject);
 	if (currentObject > ledZeppelin.length-1) {
 		finalScore();
 	} else {
-	console.log(currentObject);
-	var interval = setInterval(function() {
-			
-    	counter--;
-    	// Display 'counter' wherever you want to display it.
-	    if (counter === 0) {
-        // Display a login box
-    	    $("#countdown").html("<p>Time's Up!</p>");
-        	clearInterval(interval);
-    		console.log("next question");
-    		counter = 5;
-    		currentObject++;
-        	nextQuestion();
-    	}
+	currentQuestion = ledZeppelin[currentObject].question;
+	currentAnswer1  = ledZeppelin[currentObject].answer1;
+	currentAnswer2 = ledZeppelin[currentObject].answer2;
+	currentAnswer3 = ledZeppelin[currentObject].answer3;
+	currentAnswer4 = ledZeppelin[currentObject].answer4;
+	currentCorrectAnswer = ledZeppelin[currentObject].correctAnswer;
+	currentFactoid = ledZeppelin[currentObject].factoid;
 
-	    else {	$("#countdown").html("<p>Seconds Remaining: " + counter + "</p>");
-		}
-	}, 1000);	
+	// var interval = setInterval(function() {
+			
+ //    	counter--;
+ //    	// Display 'counter' wherever you want to display it.
+	//     if (counter === 0) {
+ //        // Display a login box
+ //    	    $("#countdown").html("<p>Time's Up!</p>");
+ //        	clearInterval(interval);
+ //    		console.log("next question");
+    		
+ //        	checkAnswer();
+ //    	}
+
+	//     else {	$("#countdown").html("<p>Seconds Remaining: " + counter + "</p>");
+	// 	}
+	// }, 1000);	
 
 	// currentQuestion = key.question;
 	$("#question").html("<label>" + currentQuestion + "</label>")
-		.append("<br/><input type='radio' name = " +currentQuestion +"  value='" + currentAnswer1 +"'>" + currentAnswer1 + "<checked>")
-		.append("<br/><input type='radio' name = " + currentQuestion + "value='" + currentAnswer2 +"'>" + currentAnswer2 + "</>")
-		.append("<br/><input type='radio' name = " +currentQuestion +"  value='" + currentAnswer3 +"'>" + currentAnswer3 + "<checked>")
-		.append("<br/><input type='radio' name = " + currentQuestion + "value='" + currentAnswer4 +"'>" + currentAnswer4 + "</>");
-	}
+		.append("<br/><input type='radio' name = '" + currentQuestion + "' value='" + currentAnswer1 + "'>" + currentAnswer1 + "</>")
+		.append("<br/><input type='radio' name = '" + currentQuestion + "' value='" + currentAnswer2 + "'>" + currentAnswer2 + "</>")
+		.append("<br/><input type='radio' name = '" + currentQuestion + "' value='" + currentAnswer3 + "'>" + currentAnswer3 + "</>")
+		.append("<br/><input type='radio' name = '" + currentQuestion + "' value='" + currentAnswer4 + "'>" + currentAnswer4 + "</>")
+		.append("<br/><button type='submit' value='submit' id='submit' class='btn'>SUBMIT</button>");
+		}
+		var submitButton = $("#submit");
+		submitButton.on("click", checkAnswer);
+
 }
 
-$("#submitAnswer").on("submit", function(e) {
 
-	if (radio.value === correctAnswer) {
+
+function checkAnswer() {
+		var answerGuessed = $('input[type="radio"]:checked').val();
+		console.log(answerGuessed);
+
+	if (answerGuessed === currentCorrectAnswer) {
 
 		correctAnswers++;
 		
 		$("#question").html("Correct!");
-		nextQuestion();
+		factoid();
 	} else {
 		incorrectAnswers++;
 		$("#question").html("Wrong!");
-		nextQuestion();
+		factoid();
 	}
-});
 
-// function finalScore() {
-// 	$("#question").html.("<h2>Your Results<h2>").append("<p>Correct Answers: " + correctAnswers + "</p>").append("<br /> <p> Wrong Answers: " + incorrectAnswers +"</p>");
-// }
+    	
+}
+
+function factoid() {
+	$("#question").append("<p>The correct answer was " + currentCorrectAnswer +".").append("<br /> <p>" + currentFactoid + "</p>").append('<br /> <button type="submit" id="continue">Next Question</button>');
+		currentObject++;
+		var continueButton = $("#continue");
+		continueButton.on("click",  nextQuestion);
+		}
+
+
+
+function finalScore() {
+	$("#question").html("<h2>Your Results<h2>").append("<p>Correct Answers: " + correctAnswers + "</p>").append("<br /> <p> Wrong Answers: " + incorrectAnswers +"</p>");
+	
+	if (correctAnswers === ledZeppelin.length-1) {
+		("#question").append("<h2>Perfect Score!</h2>");
+	}
+
+}
+
+
+
 
 //DOM==========================================
-// var interval2 = setInterval(function() {
-//  	$("#question").html("The answer was " + currentCorrectAnswer).append("<br />" + currentFactoid);
-//     		}, 3000);
 $("#countdown").html("<p>Seconds Remaining: " + counter + " </p>");
 nextQuestion();
-// timer();
+$("#start").on("click", startGame());
+$("#submit").on("click", checkAnswer());
 
-console.log(currentCorrectAnswer);
+$("#continue").on("click", nextQuestion());
+// timer();
