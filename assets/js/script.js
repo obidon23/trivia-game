@@ -92,11 +92,11 @@ function nextQuestion() {
 
 	// currentQuestion = key.question;
 	$("#question").html("<label>" + currentQuestion + "</label>")
-		.append("<br/><input type='radio' name = '" + currentQuestion + "' value='" + currentAnswer1 + "'>" + currentAnswer1 + "</>")
-		.append("<br/><input type='radio' name = '" + currentQuestion + "' value='" + currentAnswer2 + "'>" + currentAnswer2 + "</>")
-		.append("<br/><input type='radio' name = '" + currentQuestion + "' value='" + currentAnswer3 + "'>" + currentAnswer3 + "</>")
-		.append("<br/><input type='radio' name = '" + currentQuestion + "' value='" + currentAnswer4 + "'>" + currentAnswer4 + "</>")
-		.append("<br/><button type='submit' value='submit' id='submit' class='btn'>SUBMIT</button>");
+		.append("<br/><input type='radio' name = '" + currentQuestion + "' value='" + currentAnswer1 + "'></> <label>"+currentAnswer1+"</label>")
+		.append("<br/><input type='radio' name = '" + currentQuestion + "' value='" + currentAnswer2 + "'></> <label>"+currentAnswer2+"</label>")
+		.append("<br/><input type='radio' name = '" + currentQuestion + "' value='" + currentAnswer3 + "'></> <label>"+currentAnswer3+"</label>")
+		.append("<br/><input type='radio' name = '" + currentQuestion + "' value='" + currentAnswer4 + "'></> <label>"+currentAnswer4+"</label>")
+		.append("<br/><button type='submit' value='submit' id='submit' class='btn btn-info'>SUBMIT</button>");
 		}
 
 	interval = setInterval(function() {
@@ -131,7 +131,7 @@ function checkAnswer() {
 
 		correctAnswers++;
 		
-		$("#question").html("Correct!");
+		$("#question").html("<p class='correct'>Correct!</p>");
 		if (currentObject === ledZeppelin.length-1) {
 			finalFactoid();
 		}
@@ -140,7 +140,7 @@ function checkAnswer() {
 		}
 	} else {
 		incorrectAnswers++;
-		$("#question").html("Wrong!");
+		$("#question").html("<p class='wrong'>Wrong!</p>");
 		if (currentObject===ledZeppelin.length-1) {
 			finalFactoid();
 		}
@@ -153,7 +153,9 @@ function checkAnswer() {
 function factoid() {
 
 
-	$("#question").append("<p>The correct answer was " + currentCorrectAnswer +".").append("<br /> <p>" + currentFactoid + "</p>").append('<br /> <button type="submit" id="continue">Next Question</button>');
+	$("#question").append("<p>The correct answer was " + currentCorrectAnswer +".")
+	.append("<p class='factoid'>" + currentFactoid + "</p>")
+	.append('<br /> <button type="submit" id="continue" class="btn btn-success">Next Question</button>');
 		currentObject++;
 		// counter = 20;
 		var continueButton = $("#continue");
@@ -161,25 +163,38 @@ function factoid() {
 		clearInterval(interval);
 		}
 
-function finalFactoid(x) {
+function finalFactoid() {
        	clearInterval(interval);
 
-	$("#question").append("<p>The correct answer was " + currentCorrectAnswer +".").append("<br /> <p>" + currentFactoid + "</p>").append('<br /> <button type="submit" id="continue">See Scores</button>');
+	$("#question").append("<p>The correct answer was " + currentCorrectAnswer +".")
+	.append("<br /> <p>" + currentFactoid + "</p>")
+	.append('<br /> <button type="submit" id="continue" class="btn btn-info">See Scores</button>');
 		currentObject++;
 		// counter = 20;
 		var continueButton = $("#continue");
 		continueButton.on("click", finalScore);
 		}
-
+function gameReset() {
+	currentObject = 0;
+	correctAnswers = 0;
+	incorrectAnswers = 0;
+	counter = 0;
+	startGame();
+}
 
 
 function finalScore() {
-	console.log(correctAnswers);
-	$("#question").html("<h2>Your Results<h2>").append("<p>Correct Answers: " + correctAnswers + "</p>").append("<br /> <p> Wrong Answers: " + incorrectAnswers +"</p>");
+	console.log("You had " +correctAnswers+ " correct answers!");
+	$("#question").html("<h2>Your Results<h2>")
+	.append("<p>Correct Answers: " + correctAnswers + "</p>")
+	.append("<br /> <p> Wrong Answers: " + incorrectAnswers +"</p>");
 	
 	if (correctAnswers === ledZeppelin.length) {
-		("#question").append("<h2>Perfect Score!</h2>");
+		$("#question").append("<h2>Perfect Score!</h2>");
 	}
+	$("#question").append('<br /> <button type="submit" id="reset" class="btn btn-warning">New Game</button>');
+		var resetButton = $("#reset");
+		resetButton.on("click", gameReset);
 
 }
 
@@ -202,4 +217,7 @@ $("#submit").on("click", function () {
 $("#continue").on("click", function () {
 	nextQuestion();
 });
+$("#rset").on("click", function() {
+	gameReset;
+})
 // timer();

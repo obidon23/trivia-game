@@ -1,3 +1,11 @@
+@font-face {
+    font-family: Kashmir;
+    src: url(../fonts/kashmir.ttf);
+    font-weight:400;
+}
+body {
+	background-color: #28425c;
+}
 .header {
 	font-family: 'garamond', times, serif;
 	color: purple;
@@ -6,14 +14,14 @@
 
 .timer {
 	font-family: 'Titillium Web', sans-serif;
-	color: yellow;
+	color: #7b8a97;
 	font-size: 36px;
 	font-weight: bold;
 	font-style: italic;
 	width: 800px;
-	padding: 40px 0;
+	padding: 10px 0;
 	text-align: center;
-	background-color: blue;
+	background-color: #0e2841;
 }
 
 .question {
@@ -23,8 +31,8 @@
 	text-align: center;
 	width: 800px;
 	font-family: 'Titillium Web', sans-serif;
-	background-color: lightblue;
-	color: blue;
+	background-color: #7b8a97;
+	color: #011323;
 }
 
 .answers {
@@ -38,18 +46,65 @@
 	
 }	
 
-input.radio {
-	padding: 5px;
-	color: white;
-	background-color: lightgrey;
-}	
-
 
 h2 {
 	color: red;
 	font-size: 36px;
 }
 
+input[type="radio"] {
+	display: none;
+}
+
+input[type="radio"] + label:before {
+	border: 2px solid white;
+	border-radius: 50%;
+	content: "";
+	display: inline-block;
+	font-size: 12px;
+	height: 12px;
+	width: 12px;
+	line-height: 16px;
+	text-align: center;
+	vertical-align: middle;
+	margin: 6px 9px 10px 0;
+}
+
+input[type="radio"]:checked + label:before {
+	content: "&bull;";
+	font-size: 6px;
+	color: #fff;
+}
+
 .btn {
+	margin: 20px 0;
+}
+
+#start.btn.btn-success {
 	margin: 0 0 20px 0;
+}
+
+p.wrong {
+	color: red;
+	background-color: lightgrey;
+	padding: 5px;
+}
+
+p.correct {
+	color: green;
+	background-color: lightgrey;
+	padding: 5px;
+}
+h3 {
+	font-family: "kashmir", times, sans-serif;
+	color: #7b8a97;
+	font-size: 68px;
+	text-decoration: none;
+
+}
+
+.footer {
+	text-align: center;
+	color: #fff;
+	padding: 10px 0;
 }
