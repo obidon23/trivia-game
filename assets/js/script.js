@@ -92,10 +92,10 @@ function nextQuestion() {
 
 	// currentQuestion = key.question;
 	$("#question").html("<label>" + currentQuestion + "</label>")
-		.append("<br/><input type='radio' name = '" + currentQuestion + "' value='" + currentAnswer1 + "'></> <label>"+currentAnswer1+"</label>")
-		.append("<br/><input type='radio' name = '" + currentQuestion + "' value='" + currentAnswer2 + "'></> <label>"+currentAnswer2+"</label>")
-		.append("<br/><input type='radio' name = '" + currentQuestion + "' value='" + currentAnswer3 + "'></> <label>"+currentAnswer3+"</label>")
-		.append("<br/><input type='radio' name = '" + currentQuestion + "' value='" + currentAnswer4 + "'></> <label>"+currentAnswer4+"</label>")
+		.append("<br/><input type='radio' name = '" + currentQuestion + "' value='" + currentAnswer1 + "'></> <label value='" + currentAnswer1 + "' class='answer'>"+currentAnswer1 + "</label>")
+		.append("<br/><input type='radio' name = '" + currentQuestion + "' value='" + currentAnswer2 + "'></> <label value='" + currentAnswer2 + "' class='answer'>"+currentAnswer2 + "</label>")
+		.append("<br/><input type='radio' name = '" + currentQuestion + "' value='" + currentAnswer3 + "'></> <label value='" + currentAnswer3 + "' class='answer'>"+currentAnswer3 + "</label>")
+		.append("<br/><input type='radio' name = '" + currentQuestion + "' value='" + currentAnswer4 + "'></> <label value='" + currentAnswer4 + "' class='answer'>"+currentAnswer4 + "</label>")
 		.append("<br/><button type='submit' value='submit' id='submit' class='btn btn-info'>SUBMIT</button>");
 		}
 
@@ -115,15 +115,13 @@ function nextQuestion() {
 	    else {	$("#countdown").html("<p>Seconds Remaining: " + counter + "</p>");
 		}
 	}, 1000);	
-		var submitButton = $("#submit");
-		submitButton.on("click", checkAnswer);
+		// var submitButton = $("#submit");
+		// submitButton.on("click", checkAnswer);
+		$(".answer").on("click", function() { answerGuessed = $(this).attr("value"); });
 
 }
 
-
-
 function checkAnswer() {
-		var answerGuessed = $('input[type="radio"]:checked').val();
 		console.log(answerGuessed);
 
 
@@ -144,7 +142,7 @@ function checkAnswer() {
 		if (currentObject===ledZeppelin.length-1) {
 			finalFactoid();
 		}
-		else {	factoid();
+		else { factoid();
 		}
     	
 	}

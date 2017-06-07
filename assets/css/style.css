@@ -70,10 +70,11 @@ input[type="radio"] + label:before {
 	margin: 6px 9px 10px 0;
 }
 
-input[type="radio"]:checked + label:before {
+label.answer.checked:before {
 	content: "&bull;";
 	font-size: 6px;
 	color: #fff;
+	background-color: white;
 }
 
 .btn {
