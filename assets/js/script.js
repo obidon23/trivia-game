@@ -62,12 +62,12 @@ var ledZeppelin = [
 	var correctAnswers = 0;
 	var incorrectAnswers = 0;
 	// var questionCount = 0;
-	var counter = 20
+	var counter = 20;
 	var answerGuessed;
 
 //FUNCTIONS====================================
 function startGame() {
-	currentObject = 0
+	currentObject = 0;
 	$("#countdown").html("<p>Seconds Remaining: " + counter + " </p>");
 	nextQuestion();
 }
@@ -127,7 +127,7 @@ function checkAnswer() {
 		correctAnswers++;
 		
 		$("#question").html("Correct!");
-		if (currentObject = ledZeppelin-1) {
+		if (currentObject === ledZeppelin.length-1) {
 			finalFactoid();
 		}
 		else {
@@ -136,12 +136,13 @@ function checkAnswer() {
 	} else {
 		incorrectAnswers++;
 		$("#question").html("Wrong!");
-		if (currentObject-ledZeppelin-1) {
+		if (currentObject===ledZeppelin.length-1) {
 			finalFactoid();
 		}
 		else {	factoid();
 		}
     	
+	}
 }
 
 function factoid() {
@@ -174,9 +175,18 @@ function finalScore() {
 
 //DOM==========================================
 // $("#countdown").html("<p>Seconds Remaining: " + counter + " </p>");
+// startGame();
 // nextQuestion();
-$("#start").on("click", startGame());
-$("#submit").on("click", checkAnswer());
 
-$("#continue").on("click", nextQuestion());
+$("#start").on("click", function() {
+	startGame();
+});
+
+$("#submit").on("click", function () {
+	checkAnswer();
+});
+
+$("#continue").on("click", function () {
+	nextQuestion();
+});
 // timer();
