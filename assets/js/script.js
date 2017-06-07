@@ -48,7 +48,7 @@ var ledZeppelin = [
 		answer3: "1969",
 		answer4: "1970",
 		correctAnswer: "1969",
-		factoid: "Led Zeppelin was released in January in the USA, while Led Zepelin II came out later that year in October."
+		factoid: "Led Zeppelin was released in January in the USA, while Led Zepellin II came out later that year in October."
 	},
 ];
 	var currentObject = 0;
@@ -63,6 +63,7 @@ var ledZeppelin = [
 	var incorrectAnswers = 0;
 	// var questionCount = 0;
 	var counter = 20;
+	var interval;
 	var answerGuessed;
 
 //FUNCTIONS====================================
@@ -85,23 +86,9 @@ function nextQuestion() {
 	currentAnswer4 = ledZeppelin[currentObject].answer4;
 	currentCorrectAnswer = ledZeppelin[currentObject].correctAnswer;
 	currentFactoid = ledZeppelin[currentObject].factoid;
+	counter = 21;
 
-	// var interval = setInterval(function() {
-			
- //    	counter--;
- //    	// Display 'counter' wherever you want to display it.
-	//     if (counter === 0) {
- //        // Display a login box
- //    	    $("#countdown").html("<p>Time's Up!</p>");
- //        	clearInterval(interval);
- //    		console.log("next question");
-    		
- //        	checkAnswer();
- //    	}
 
-	//     else {	$("#countdown").html("<p>Seconds Remaining: " + counter + "</p>");
-	// 	}
-	// }, 1000);	
 
 	// currentQuestion = key.question;
 	$("#question").html("<label>" + currentQuestion + "</label>")
@@ -111,6 +98,23 @@ function nextQuestion() {
 		.append("<br/><input type='radio' name = '" + currentQuestion + "' value='" + currentAnswer4 + "'>" + currentAnswer4 + "</>")
 		.append("<br/><button type='submit' value='submit' id='submit' class='btn'>SUBMIT</button>");
 		}
+
+	interval = setInterval(function() {
+			
+    	counter--;
+    	// Display 'counter' wherever you want to display it.
+	    if (counter === 0) {
+        // Display a login box
+    	    $("#countdown").html("<p>Time's Up!</p>");
+        	clearInterval(interval);
+    		console.log("next question");
+    		
+        	checkAnswer();
+    	}
+
+	    else {	$("#countdown").html("<p>Seconds Remaining: " + counter + "</p>");
+		}
+	}, 1000);	
 		var submitButton = $("#submit");
 		submitButton.on("click", checkAnswer);
 
@@ -121,6 +125,7 @@ function nextQuestion() {
 function checkAnswer() {
 		var answerGuessed = $('input[type="radio"]:checked').val();
 		console.log(answerGuessed);
+
 
 	if (answerGuessed === currentCorrectAnswer) {
 
@@ -146,15 +151,22 @@ function checkAnswer() {
 }
 
 function factoid() {
+
+
 	$("#question").append("<p>The correct answer was " + currentCorrectAnswer +".").append("<br /> <p>" + currentFactoid + "</p>").append('<br /> <button type="submit" id="continue">Next Question</button>');
 		currentObject++;
+		// counter = 20;
 		var continueButton = $("#continue");
 		continueButton.on("click",  nextQuestion);
+		clearInterval(interval);
 		}
 
-function finalFactoid() {
+function finalFactoid(x) {
+       	clearInterval(interval);
+
 	$("#question").append("<p>The correct answer was " + currentCorrectAnswer +".").append("<br /> <p>" + currentFactoid + "</p>").append('<br /> <button type="submit" id="continue">See Scores</button>');
 		currentObject++;
+		// counter = 20;
 		var continueButton = $("#continue");
 		continueButton.on("click", finalScore);
 		}
@@ -162,9 +174,10 @@ function finalFactoid() {
 
 
 function finalScore() {
+	console.log(correctAnswers);
 	$("#question").html("<h2>Your Results<h2>").append("<p>Correct Answers: " + correctAnswers + "</p>").append("<br /> <p> Wrong Answers: " + incorrectAnswers +"</p>");
 	
-	if (correctAnswers === ledZeppelin.length-1) {
+	if (correctAnswers === ledZeppelin.length) {
 		("#question").append("<h2>Perfect Score!</h2>");
 	}
 
