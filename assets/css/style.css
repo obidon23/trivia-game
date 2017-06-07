@@ -12,6 +12,7 @@ body {
 	font-size: 36px;
 }
 
+
 .timer {
 	font-family: 'Titillium Web', sans-serif;
 	color: #7b8a97;
@@ -25,14 +26,13 @@ body {
 }
 
 .question {
-	padding: 40px;
+	padding: 20px 80px 20px 80px;
 	font-size: 24px;
 	line-height: 36px;
-	text-align: center;
 	width: 800px;
 	font-family: 'Titillium Web', sans-serif;
 	background-color: #7b8a97;
-	color: #011323;
+	color: #fff;
 }
 
 .answers {
@@ -77,23 +77,28 @@ input[type="radio"]:checked + label:before {
 }
 
 .btn {
-	margin: 20px 0;
+	margin: 20px auto;
+	display: block;
 }
 
-#start.btn.btn-success {
-	margin: 0 0 20px 0;
-}
+
 
 p.wrong {
 	color: red;
 	background-color: lightgrey;
 	padding: 5px;
+	text-align: center;
 }
 
 p.correct {
 	color: green;
 	background-color: lightgrey;
 	padding: 5px;
+	text-align: center;
+}
+
+.factoid {
+	color:  chartreuse;
 }
 h3 {
 	font-family: "kashmir", times, sans-serif;

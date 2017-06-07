@@ -19,7 +19,7 @@ var ledZeppelin = [
 		answer3: "Achille's Last Stand",
 		answer4: "Thank You",
 		correctAnswer: "Immigrant Song",
-		factoid: "Bron-Yr-Aur Stomp references the remote Welsh cottage where most of the tracks were written"
+		factoid: "&quot;Bron-Yr-Aur Stomp&quot; references the remote Welsh cottage where most of the tracks were written"
 	},
 	 {
 		question: "What song charted highest for Led Zeppelin?",
@@ -28,7 +28,7 @@ var ledZeppelin = [
 		answer3: "Misty Mountain Hop",
 		answer4: "Rock and Roll",
 		correctAnswer: "Whole Lotta Love",
-		factoid: "Whole Lotta Love, one of the few songs released as singles,  peaked at #2 on the Billboard Hot 100."
+		factoid: "&quot;Whole Lotta Love&quot;, one of the few songs released as singles,  peaked at #2 on the Billboard Hot 100."
 	},
 
 	 {
@@ -48,7 +48,7 @@ var ledZeppelin = [
 		answer3: "1969",
 		answer4: "1970",
 		correctAnswer: "1969",
-		factoid: "Led Zeppelin was released in January in the USA, while Led Zepellin II came out later that year in October."
+		factoid: "&quot;Led Zeppelin&quot; was released in January in the USA, while &quot;Led Zepellin II&quot; came out later that year in October."
 	},
 ];
 	var currentObject = 0;
@@ -167,7 +167,7 @@ function finalFactoid() {
        	clearInterval(interval);
 
 	$("#question").append("<p>The correct answer was " + currentCorrectAnswer +".")
-	.append("<br /> <p>" + currentFactoid + "</p>")
+	.append("<br /> <p class='factoid'>" + currentFactoid + "</p>")
 	.append('<br /> <button type="submit" id="continue" class="btn btn-info">See Scores</button>');
 		currentObject++;
 		// counter = 20;
