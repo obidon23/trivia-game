@@ -3,6 +3,7 @@
     src: url(../fonts/kashmir.ttf);
     font-weight:400;
 }
+
 body {
 	background-color: #28425c;
 }
@@ -46,17 +47,27 @@ body {
 	
 }	
 
+.image {
+	width: 75%;
+	margin: 0 auto;
+}
 
 h2 {
-	color: red;
+	color: #0e2841;
 	font-size: 36px;
+	text-align: center;
+	padding: 10px;
+
 }
 
 input[type="radio"] {
 	display: none;
 }
 
-input[type="radio"] + label:before {
+.answer:hover {
+	color: orange;
+}
+/*input[type="radio"] + label:before {
 	border: 2px solid white;
 	border-radius: 50%;
 	content: "";
@@ -80,37 +91,44 @@ label:checked {
 	color: #fff;
 	background-color: pink;
 }
-
+*/
 .btn {
 	margin: 20px auto;
 	display: block;
 }
 
-
-
 p.wrong {
 	color: red;
 	background-color: lightgrey;
-	padding: 5px;
+	padding: 30px;
 	text-align: center;
+	font-size: 60px;
+	font-weight: bold;
 }
 
 p.correct {
-	color: green;
+	color: #00cc00;
 	background-color: lightgrey;
-	padding: 5px;
+	padding: 30px;
 	text-align: center;
+	font-size: 60px;
+	font-weight: bold;
 }
 
 .factoid {
 	color:  chartreuse;
 }
+
 h3 {
-	font-family: "kashmir", times, sans-serif;
+	font-family: "KASHMIR", times, sans-serif;
 	color: #7b8a97;
 	font-size: 68px;
 	text-decoration: none;
 
+}
+
+input[type="radio"] {
+	margin-left: 100px;
 }
 
 .footer {

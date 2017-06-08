@@ -96,7 +96,8 @@ function nextQuestion() {
 		.append("<br/><input type='radio' name = '" + currentQuestion + "' value='" + currentAnswer2 + "id='fullAnswerClick'></> <label value='" + currentAnswer2 + "' class='answer'>"+currentAnswer2 + "</label>")
 		.append("<br/><input type='radio' name = '" + currentQuestion + "' value='" + currentAnswer3 + "id='fullAnswerClick'></> <label value='" + currentAnswer3 + "' class='answer'>"+currentAnswer3 + "</label>")
 		.append("<br/><input type='radio' name = '" + currentQuestion + "' value='" + currentAnswer4 + "id='fullAnswerClick'></> <label value='" + currentAnswer4 + "' class='answer'>"+currentAnswer4 + "</label>")
-		.append("<br/><button type='submit' value='submit' for='<fullAnswerClick></fullAnswerClick>' id='submit' class='btn btn-info'>SUBMIT</button>");
+		// .append("<br/><button type='submit' value='submit' for='fullAnswerClick' id='submit' class='btn btn-info'>SUBMIT</button>")
+		;
 		}
 
 	interval = setInterval(function() {
@@ -118,7 +119,9 @@ function nextQuestion() {
 		// var submitButton = $("#submit");
 		// submitButton.on("click", checkAnswer);
 		$(".answer").on("click", function() { 
-			answerGuessed = $(this).attr("value"); });
+			answerGuessed = $(this).attr("value"); 
+			checkAnswer();
+		});
 }
 
 function checkAnswer() {
@@ -153,7 +156,7 @@ function factoid() {
 
 	$("#question").append("<p>The correct answer was " + currentCorrectAnswer +".")
 	.append("<p class='factoid'>" + currentFactoid + "</p>")
-	.append('<br /> <button type="submit" id="continue" class="btn btn-success">Next Question</button>');
+	.append('<br /> <button type="submit" id="continue" class="btn btn-success btn-lg">Next Question</button>');
 		currentObject++;
 		// counter = 20;
 		var continueButton = $("#continue");
@@ -166,7 +169,7 @@ function finalFactoid() {
 
 	$("#question").append("<p>The correct answer was " + currentCorrectAnswer +".")
 	.append("<br /> <p class='factoid'>" + currentFactoid + "</p>")
-	.append('<br /> <button type="submit" id="continue" class="btn btn-info">See Scores</button>');
+	.append('<br /> <button type="submit" id="continue" class="btn btn-info btn-lg">See Scores</button>');
 		currentObject++;
 		// counter = 20;
 		var continueButton = $("#continue");
@@ -183,14 +186,25 @@ function gameReset() {
 
 function finalScore() {
 	console.log("You had " +correctAnswers+ " correct answers!");
-	$("#question").html("<h2>Your Results<h2>")
-	.append("<p>Correct Answers: " + correctAnswers + "</p>")
-	.append("<br /> <p> Wrong Answers: " + incorrectAnswers +"</p>");
+	totalAnswers = correctAnswers + incorrectAnswers
+	$("#question").html("<h2>Your Results: You went " + correctAnswers + " for " + totalAnswers +" !</h2>" );
+	// .append("<p>Correct Answers: " + correctAnswers + "</p>")
+	// .append("<br /> <p> Wrong Answers: " + incorrectAnswers +"</p>");
 	
 	if (correctAnswers === ledZeppelin.length) {
-		$("#question").append("<h2>Perfect Score!</h2>");
+		$("#question").append("<h2>You climbed the Stairway to Heaven!</h2>").append("<img src='assets/images/zoso.jpg>'");
+		// var audio = new Audio("assets/songs/stairway.mp3");
+		// Audio.play();
+
+	} else {
+		$("#question").append("<h2>You must be Dazed and Confused!</h2>").append("<img src='assets/images/hindenburg.jpg>'");
+
+		// var audio = new Audio("assets/songs/stairway.mp3");
+		// Audio.play();
+
 	}
-	$("#question").append('<br /> <button type="submit" id="reset" class="btn btn-warning">New Game</button>');
+	$("#question").append('<br /> <button type="submit" id="reset" class="btn btn-warning btn-lg">New Game</button>');
+
 		var resetButton = $("#reset");
 		resetButton.on("click", gameReset);
 
