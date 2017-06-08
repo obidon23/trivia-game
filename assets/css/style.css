@@ -43,13 +43,14 @@ body {
 }
 
 .submit {
-	padding: 30px 0 30px 100px;
+	padding: 30px 1 30px 100px;
 	
 }	
 
 .image {
 	width: 75%;
 	margin: 0 auto;
+	display: block;
 }
 
 h2 {
@@ -120,7 +121,7 @@ p.correct {
 }
 
 h3 {
-	font-family: "KASHMIR", times, sans-serif;
+	font-family: "Kashmir", times, sans-serif;
 	color: #7b8a97;
 	font-size: 68px;
 	text-decoration: none;

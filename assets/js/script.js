@@ -65,6 +65,7 @@ var ledZeppelin = [
 	var counter = 10;
 	var interval;
 	var answerGuessed;
+	var audio;
 
 //FUNCTIONS====================================
 function startGame() {
@@ -180,6 +181,8 @@ function gameReset() {
 	correctAnswers = 0;
 	incorrectAnswers = 0;
 	counter = 0;
+	audio.pause();
+	audio.load();
 	startGame();
 }
 
@@ -192,20 +195,20 @@ function finalScore() {
 	// .append("<br /> <p> Wrong Answers: " + incorrectAnswers +"</p>");
 	
 	if (correctAnswers === ledZeppelin.length) {
-		$("#question").append("<h2>You climbed the Stairway to Heaven!</h2>").append("<img src='assets/images/zoso.jpg>'");
+		$("#question").append("<h2>You climbed the Stairway to Heaven!</h2>").append("<img src='assets/images/zoso.jpg' class='image'>");
 		// var audio = new Audio("assets/songs/stairway.mp3");
-		// Audio.play();
+		// audio.play();
 
 	} else {
-		$("#question").append("<h2>You must be Dazed and Confused!</h2>").append("<img src='assets/images/hindenburg.jpg>'");
+		$("#question").append("<h2>You must be Dazed and Confused!</h2>").append("<img src='assets/images/hindenburg.jpg' class='image'>");
 
-		// var audio = new Audio("assets/songs/stairway.mp3");
-		// Audio.play();
+		// audio = new Audio("assets/songs/confused.mp3");
+		// audio.play();
 
 	}
 	$("#question").append('<br /> <button type="submit" id="reset" class="btn btn-warning btn-lg">New Game</button>');
 
-		var resetButton = $("#reset");
+		resetButton = $("#reset");
 		resetButton.on("click", gameReset);
 
 }
