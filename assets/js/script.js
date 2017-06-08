@@ -62,7 +62,7 @@ var ledZeppelin = [
 	var correctAnswers = 0;
 	var incorrectAnswers = 0;
 	// var questionCount = 0;
-	var counter = 20;
+	var counter = 10;
 	var interval;
 	var answerGuessed;
 
@@ -86,17 +86,17 @@ function nextQuestion() {
 	currentAnswer4 = ledZeppelin[currentObject].answer4;
 	currentCorrectAnswer = ledZeppelin[currentObject].correctAnswer;
 	currentFactoid = ledZeppelin[currentObject].factoid;
-	counter = 21;
+	counter = 11;
 
 
 
 	// currentQuestion = key.question;
 	$("#question").html("<label>" + currentQuestion + "</label>")
-		.append("<br/><input type='radio' name = '" + currentQuestion + "' value='" + currentAnswer1 + "'></> <label value='" + currentAnswer1 + "' class='answer'>"+currentAnswer1 + "</label>")
-		.append("<br/><input type='radio' name = '" + currentQuestion + "' value='" + currentAnswer2 + "'></> <label value='" + currentAnswer2 + "' class='answer'>"+currentAnswer2 + "</label>")
-		.append("<br/><input type='radio' name = '" + currentQuestion + "' value='" + currentAnswer3 + "'></> <label value='" + currentAnswer3 + "' class='answer'>"+currentAnswer3 + "</label>")
-		.append("<br/><input type='radio' name = '" + currentQuestion + "' value='" + currentAnswer4 + "'></> <label value='" + currentAnswer4 + "' class='answer'>"+currentAnswer4 + "</label>")
-		.append("<br/><button type='submit' value='submit' id='submit' class='btn btn-info'>SUBMIT</button>");
+		.append("<br/><input type='radio' name = '" + currentQuestion + "' value='" + currentAnswer1 + "id='fullAnswerClick'></> <label value='" + currentAnswer1 + "' class='answer'>"+currentAnswer1 + "</label>")
+		.append("<br/><input type='radio' name = '" + currentQuestion + "' value='" + currentAnswer2 + "id='fullAnswerClick'></> <label value='" + currentAnswer2 + "' class='answer'>"+currentAnswer2 + "</label>")
+		.append("<br/><input type='radio' name = '" + currentQuestion + "' value='" + currentAnswer3 + "id='fullAnswerClick'></> <label value='" + currentAnswer3 + "' class='answer'>"+currentAnswer3 + "</label>")
+		.append("<br/><input type='radio' name = '" + currentQuestion + "' value='" + currentAnswer4 + "id='fullAnswerClick'></> <label value='" + currentAnswer4 + "' class='answer'>"+currentAnswer4 + "</label>")
+		.append("<br/><button type='submit' value='submit' for='<fullAnswerClick></fullAnswerClick>' id='submit' class='btn btn-info'>SUBMIT</button>");
 		}
 
 	interval = setInterval(function() {
@@ -117,13 +117,13 @@ function nextQuestion() {
 	}, 1000);	
 		// var submitButton = $("#submit");
 		// submitButton.on("click", checkAnswer);
-		$(".answer").on("click", function() { answerGuessed = $(this).attr("value"); });
-
+		$(".answer").on("click", function() { 
+			answerGuessed = $(this).attr("value"); });
 }
 
 function checkAnswer() {
 		console.log(answerGuessed);
-
+		$(".timer").html("You answered: " + answerGuessed);
 
 	if (answerGuessed === currentCorrectAnswer) {
 

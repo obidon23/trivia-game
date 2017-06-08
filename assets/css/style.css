@@ -70,11 +70,15 @@ input[type="radio"] + label:before {
 	margin: 6px 9px 10px 0;
 }
 
-label.answer.checked:before {
+input[type="radio"]:checked + label:before {
+	color: blue;
+	background-color: pink;
+}
+label:checked {
 	content: "&bull;";
 	font-size: 6px;
 	color: #fff;
-	background-color: white;
+	background-color: pink;
 }
 
 .btn {
