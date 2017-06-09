@@ -28,7 +28,7 @@ var ledZeppelin = [
 		answer3: "Misty Mountain Hop",
 		answer4: "Rock and Roll",
 		correctAnswer: "Whole Lotta Love",
-		factoid: "&quot;Whole Lotta Love&quot;, one of the few songs released as singles,  peaked at #2 on the Billboard Hot 100."
+		factoid: "&quot;Whole Lotta Love&quot;, one of the few songs released as a single,  peaked at #2 on the Billboard Hot 100."
 	},
 
 	 {
@@ -126,13 +126,10 @@ function nextQuestion() {
 }
 
 function checkAnswer() {
-		console.log(answerGuessed);
-		$(".timer").html("You answered: " + answerGuessed);
-
+		
 	if (answerGuessed === currentCorrectAnswer) {
 
 		correctAnswers++;
-		
 		$("#question").html("<p class='correct'>Correct!</p>");
 		if (currentObject === ledZeppelin.length-1) {
 			finalFactoid();
@@ -140,7 +137,9 @@ function checkAnswer() {
 		else {
 			factoid();
 		}
-	} else {
+	} 
+	else if (answerGuessed === "") {
+		answerGuessed = "<NONE>";
 		incorrectAnswers++;
 		$("#question").html("<p class='wrong'>Wrong!</p>");
 		if (currentObject===ledZeppelin.length-1) {
@@ -148,8 +147,19 @@ function checkAnswer() {
 		}
 		else { factoid();
 		}
-    	
 	}
+	else {
+		incorrectAnswers++;
+		$("#question").html("<p class='wrong'>Wrong!</p>");
+		if (currentObject===ledZeppelin.length-1) {
+			finalFactoid();
+		}
+		else { factoid();
+		}
+	}
+	$(".timer").html("You answered: " + answerGuessed);
+	console.log(answerGuessed);
+
 }
 
 function factoid() {
@@ -181,8 +191,9 @@ function gameReset() {
 	correctAnswers = 0;
 	incorrectAnswers = 0;
 	counter = 0;
-	// audio.pause();
-	// audio.load();
+	answerGuessed = "";
+	audio.pause();
+	audio.load();
 	startGame();
 }
 
@@ -190,25 +201,28 @@ function gameReset() {
 function finalScore() {
 	console.log("You had " +correctAnswers+ " correct answers!");
 	totalAnswers = correctAnswers + incorrectAnswers
-	$("#question").html("<h2>Your Results: You went " + correctAnswers + " for " + totalAnswers +" !</h2>" );
+	$("#question").html("<h2>You went " + correctAnswers + " for " + totalAnswers +" !</h2>" );
 	// .append("<p>Correct Answers: " + correctAnswers + "</p>")
 	// .append("<br /> <p> Wrong Answers: " + incorrectAnswers +"</p>");
 	
 	if (correctAnswers === ledZeppelin.length) {
-		$("#question").append("<h2>You climbed the Stairway to Heaven!</h2>").append("<img src='assets/images/zoso.jpg' class='image'>");
-		// audio = new Audio("https://www.youtube.com/embed/LdNiT3xDDhA?start=351");
-		// audio.play();
+		$("#timer").html("<h3>You climbed the Stairway to Heaven!</h3>");
+		$("#question").append("<img src='assets/images/zoso.jpg' class='image'>");
+		audio = new Audio("assets/songs/stairway.mp3");
+		audio.play();
 
 	} else if (correctAnswers <= 1) {
-		$("#question").append("<h2>You must be Dazed and Confused!</h2>").append("<img src='assets/images/hindenburg.jpg' class='image'>");
-		// audio = new Audio("https://www.youtube.com/embed/IS6n2Hx9Ykk?start=465");
-		// audio.play();
+		$("#timer").html("<h3>You must be Dazed and Confused!</h3>");
+		$("#question").append("<img src='assets/images/hindenburg.jpg' class='image'>");
+		audio = new Audio("assets/songs/confused.mp3");
+		audio.play();
 
 	} else {
-		$("#question").append("<h2>We have a Communication Breakdown!</h2>").append("<img src='assets/images/breakdown.jpg' class='image'>");
+		$("#timer").html("<h3>We have a Communication Breakdown!</h3>");
+		$("#question").append("<img src='assets/images/breakdown.jpg' class='image'>");
 
-		// audio = new Audio("https://www.youtube.com/embed/3EH7QMVnSRI/?start=115");
-		// audio.play();
+		audio = new Audio("assets/songs/breakdown.mp3");
+		audio.play();
 
 	}
 	$("#question").append('<br /> <button type="submit" id="reset" class="btn btn-warning btn-lg">New Game</button>');
