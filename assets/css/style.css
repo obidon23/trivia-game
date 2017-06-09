@@ -1,5 +1,5 @@
 @font-face {
-    font-family: Kashmir;
+    font-family: kashmir;
     src: url(../fonts/kashmir.ttf);
     font-weight:400;
 }
@@ -121,7 +121,7 @@ p.correct {
 }
 
 h3 {
-	font-family: "Kashmir", times, sans-serif;
+	font-family: "kashmir", times, sans-serif;
 	color: #7b8a97;
 	font-size: 68px;
 	text-decoration: none;

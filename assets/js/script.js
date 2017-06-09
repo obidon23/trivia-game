@@ -181,8 +181,8 @@ function gameReset() {
 	correctAnswers = 0;
 	incorrectAnswers = 0;
 	counter = 0;
-	audio.pause();
-	audio.load();
+	// audio.pause();
+	// audio.load();
 	startGame();
 }
 
@@ -195,14 +195,20 @@ function finalScore() {
 	// .append("<br /> <p> Wrong Answers: " + incorrectAnswers +"</p>");
 	
 	if (correctAnswers === ledZeppelin.length) {
-		$("#question").append("<h2>You climbed the Stairway to Heaven!</h2>").append("<img src='assets/images/zoso.jpg' class='image'>");
-		// var audio = new Audio("assets/songs/stairway.mp3");
+		$("#question").append("<h2>You climbed the Stairway to Heaven!</h2>").append("<img src='assets/images/zoso.jpg' class='image'>")
+		append('<iframe width="560" height="0" src="https://www.youtube.com/embed/IS6n2Hx9Ykk?rel=0&amp;controls=0&amp;showinfo=0&autoplay=1&start=465" frameborder="0"></iframe>');
+		// audio = new Audio("https://www.youtube.com/embed/LdNiT3xDDhA?start=351");
+		// audio.play();
+
+	} else if (correctAnswers <= 1) {
+		$("#question").append("<h2>You must be Dazed and Confused!</h2>").append("<img src='assets/images/hindenburg.jpg' class='image'>");
+		// audio = new Audio("https://www.youtube.com/embed/IS6n2Hx9Ykk?start=465");
 		// audio.play();
 
 	} else {
-		$("#question").append("<h2>You must be Dazed and Confused!</h2>").append("<img src='assets/images/hindenburg.jpg' class='image'>");
+		$("#question").append("<h2>We have a Communication Breakdown!</h2>").append("<img src='assets/images/breakdown.jpg' class='image'>");
 
-		// audio = new Audio("assets/songs/confused.mp3");
+		// audio = new Audio("https://www.youtube.com/embed/3EH7QMVnSRI/?start=115");
 		// audio.play();
 
 	}
