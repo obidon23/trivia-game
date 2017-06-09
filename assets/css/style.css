@@ -4,10 +4,8 @@
     font-weight:400;
 }
 
-.container-fluid {
+body {
 	background-color: #28425c;
-	position: relative;
-	margin-bottom: 40px;
 }
 .header {
 	font-family: 'garamond', times, serif;
@@ -24,6 +22,7 @@
 	font-style: italic;
 	text-align: center;
 	background-color: #0e2841;
+	padding: 30px;
 	
 }
 
@@ -34,6 +33,7 @@
 	font-family: 'Titillium Web', sans-serif;
 	background-color: #7b8a97;
 	color: #fff;
+	min-height: 400px;
 }
 
 .answers {
@@ -129,8 +129,9 @@ h3 {
 
 }
 
-input[type="radio"] {
-	margin-left: 100px;
+label[class="answer"] {
+	margin: 10px 0 0 150px;
+	color: #0e2841;
 }
 
 .footer {
@@ -138,8 +139,6 @@ input[type="radio"] {
 	color: #fff;
 	padding: 10px 0;
 	height: 40px;
-	position: absolute;
 	bottom: 0;
-	display: block;
-	background-color: pink;
+
 }

@@ -1,5 +1,5 @@
 // VARIABLES==============================
-
+// Sets of questions and related data
 var ledZeppelin = [
 	
 	 {
@@ -51,6 +51,7 @@ var ledZeppelin = [
 		factoid: "&quot;Led Zeppelin&quot; was released in January in the USA, while &quot;Led Zepellin II&quot; came out later that year in October."
 	},
 ];
+// gameplay variables
 	var currentObject = 0;
 	var currentQuestion = ledZeppelin[currentObject].question;
 	var currentAnswer1  = ledZeppelin[currentObject].answer1;
@@ -68,12 +69,14 @@ var ledZeppelin = [
 	var audio;
 
 //FUNCTIONS====================================
+// function to start the game
 function startGame() {
 	currentObject = 0;
 	$("#countdown").html("<p>Seconds Remaining: " + counter + " </p>");
 	nextQuestion();
 }
 
+//function to build the next question
 function nextQuestion() {
 	console.log(currentObject);
 	if (currentObject > ledZeppelin.length-1) {
@@ -125,6 +128,7 @@ function nextQuestion() {
 		});
 }
 
+// when the answer is submitted (or time runs out), this checks the answer
 function checkAnswer() {
 		
 	if (answerGuessed === currentCorrectAnswer) {
@@ -162,6 +166,7 @@ function checkAnswer() {
 
 }
 
+//these post the results from each question along with additional information
 function factoid() {
 
 
@@ -186,6 +191,8 @@ function finalFactoid() {
 		var continueButton = $("#continue");
 		continueButton.on("click", finalScore);
 		}
+
+//this resets the game without refreshing the screen		
 function gameReset() {
 	currentObject = 0;
 	correctAnswers = 0;
@@ -197,7 +204,7 @@ function gameReset() {
 	startGame();
 }
 
-
+//this will show the final score and provide positive and/or negative reinforcement
 function finalScore() {
 	console.log("You had " +correctAnswers+ " correct answers!");
 	totalAnswers = correctAnswers + incorrectAnswers
@@ -206,19 +213,19 @@ function finalScore() {
 	// .append("<br /> <p> Wrong Answers: " + incorrectAnswers +"</p>");
 	
 	if (correctAnswers === ledZeppelin.length) {
-		$("#timer").html("<h3>You climbed the Stairway to Heaven!</h3>");
+		$(".timer").html("<h3>You climbed the Stairway to Heaven!</h3>");
 		$("#question").append("<img src='assets/images/zoso.jpg' class='image'>");
 		audio = new Audio("assets/songs/stairway.mp3");
 		audio.play();
 
 	} else if (correctAnswers <= 1) {
-		$("#timer").html("<h3>You must be Dazed and Confused!</h3>");
+		$(".timer").html("<h3>You must be Dazed and Confused!</h3>");
 		$("#question").append("<img src='assets/images/hindenburg.jpg' class='image'>");
 		audio = new Audio("assets/songs/confused.mp3");
 		audio.play();
 
 	} else {
-		$("#timer").html("<h3>We have a Communication Breakdown!</h3>");
+		$(".timer").html("<h3>We have a Communication Breakdown!</h3>");
 		$("#question").append("<img src='assets/images/breakdown.jpg' class='image'>");
 
 		audio = new Audio("assets/songs/breakdown.mp3");
