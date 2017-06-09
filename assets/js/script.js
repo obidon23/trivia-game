@@ -195,8 +195,7 @@ function finalScore() {
 	// .append("<br /> <p> Wrong Answers: " + incorrectAnswers +"</p>");
 	
 	if (correctAnswers === ledZeppelin.length) {
-		$("#question").append("<h2>You climbed the Stairway to Heaven!</h2>").append("<img src='assets/images/zoso.jpg' class='image'>")
-		append('<iframe width="560" height="0" src="https://www.youtube.com/embed/IS6n2Hx9Ykk?rel=0&amp;controls=0&amp;showinfo=0&autoplay=1&start=465" frameborder="0"></iframe>');
+		$("#question").append("<h2>You climbed the Stairway to Heaven!</h2>").append("<img src='assets/images/zoso.jpg' class='image'>");
 		// audio = new Audio("https://www.youtube.com/embed/LdNiT3xDDhA?start=351");
 		// audio.play();
 
